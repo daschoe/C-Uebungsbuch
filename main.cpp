@@ -4,6 +4,7 @@
 #include <string>
 #include <ctime>
 #include "myMakros.h"
+#include "summe.h"
 using namespace std;
 
 
@@ -382,6 +383,79 @@ static void kapitel8_aufgabe2() {
 
 }
 
+static void kapitel9_aufgabe1() {
+    srand(1);
+    int a = rand();
+    int b = rand();
+    int c = rand();
+    int d = rand();
+    cout << "Die Summe von " << a << ", "<< b << ", " << c << ", " << d << " ist "<< summe(a,b,c,d) << endl;
+    cout << "Die Summe von " << a << ", "<< b << ", " << c << " ist "<< summe(a,b,c) << endl;
+    cout << "Die Summe von " << a << ", "<< b << " ist "<< summe(a,b) << endl;
+}
+
+// Für Aufgabe 2, Kapitel 9
+inline double Max(double x, double y) { return x>y ? x : y; }
+inline char Max(char x, char y) { return x>y ? x : y; }
+
+static void kapitel9_aufgabe2() {
+    cout << Max(0.9, 0.2) << endl;
+    cout << Max('a', 'b') << endl;
+    //cout << Max(40, 99) << endl; // Funktioniert nicht, wenn es überladene Funktionen gibt!
+
+}
+
+static long fakultaet_schleife(int n) {
+    long ergebnis = 1;
+    for (int i = 1; i <= n; i++) {
+        ergebnis *= i;
+    }
+    return ergebnis;
+}
+
+static long fakultaet_rekursiv (int n) {
+    if (n==0)
+        return 1;
+    return fakultaet_schleife(n-1)*n;
+}
+
+static void kapitel9_aufgabe3() {
+    cout << setw(4) << "n" << " | " << "Fakultät von n Schleife" << " | " << "Fakultät von n rekursiv" << endl;
+    cout << string((4+3+23+3+23), '-') << endl;
+    for (int i = 0; i <= 20; i++) {
+        cout << setw(4) << i << " | " << setw(23) << fakultaet_schleife(i) << " | " << setw(23) << fakultaet_rekursiv(i) << endl;
+    }
+}
+
+// Für Aufgabe 4, Kapitel 9
+double pow(double basis, int exp) {
+    // Sonderfälle
+    if (exp==0)
+        return 1.0;
+    if (basis==0 && exp>0)
+        return 0.0;
+    if (basis==0 && exp<=0)
+        return HUGE_VAL;
+
+    // normales Verhalten
+    basis = exp > 0 ? basis : 1.0/basis;
+    exp = exp > 0 ? exp : -exp;
+    double result = basis;
+        for (int i = 1; i < exp; i++) {
+            result *= basis;
+        }
+
+    return result;
+}
+
+static void kapitel9_aufgabe4() {
+    cout << 2.5 << " hoch " << 3 << " ist " << pow(2.5, 3)<< endl;
+    cout << 2.5 << " hoch " << 0 << " ist " << pow(2.5, 0)<< endl;
+    cout << 0 << " hoch " << 3 << " ist " << pow(0.0, 3)<< endl;
+    cout << 0 << " hoch " << -3 << " ist " << pow(0.0, -3)<< endl;
+    cout << 2 << " hoch " << -2 << " ist " << pow(2.0, -2)<< endl;
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -403,6 +477,10 @@ int main() {
     //kapitel7_aufgabe2();
     //loesung_7_2();
     //kapitel8_aufgabe1();
-    kapitel8_aufgabe2();
+    //kapitel8_aufgabe2();
+    //kapitel9_aufgabe1();
+    //kapitel9_aufgabe2();
+    //kapitel9_aufgabe3();
+    //kapitel9_aufgabe4();
     return 0;
 }
