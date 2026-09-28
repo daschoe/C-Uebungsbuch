@@ -455,6 +455,18 @@ static void kapitel9_aufgabe4() {
     cout << 0 << " hoch " << -3 << " ist " << pow(0.0, -3)<< endl;
     cout << 2 << " hoch " << -2 << " ist " << pow(2.0, -2)<< endl;
 }
+// Für Aufgabe 2, Kapitel 10
+namespace TOOL1 {
+        #include "tool1.h"
+    }
+    namespace TOOL2 {
+        #include "tool2.h"
+    }
+static void kapitel10_aufgabe2() {
+
+    cout << "Tool1 aufgerufen mit (1, 2): " << TOOL1::calculate(1,2) << endl;
+    cout << "Tool2 aufgerufen mit (1, 2): " << TOOL2::calculate(1,2) << endl;
+}
 
 int main() {
     //kapitel1_aufgabe1();
@@ -482,5 +494,6 @@ int main() {
     //kapitel9_aufgabe2();
     //kapitel9_aufgabe3();
     //kapitel9_aufgabe4();
+    kapitel10_aufgabe2();
     return 0;
 }
