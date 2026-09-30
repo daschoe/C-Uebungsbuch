@@ -12,7 +12,7 @@ set(PROJECT_HEADERS
 set(PROJECT_SOURCES
         main.cpp
         summe.cpp
-        Passw1.cpp
+        Passw2.cpp
 )
 
 add_executable(Uebungsbuch ${PROJECT_SOURCES} ${PROJECT_HEADERS})

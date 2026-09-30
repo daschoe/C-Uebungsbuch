@@ -1,3 +1,4 @@
+#include <climits>
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -5,6 +6,8 @@
 #include <ctime>
 #include "myMakros.h"
 #include "summe.h"
+#include "Passw2.cpp"
+
 using namespace std;
 
 
@@ -468,6 +471,26 @@ static void kapitel10_aufgabe2() {
     cout << "Tool2 aufgerufen mit (1, 2): " << TOOL2::calculate(1,2) << endl;
 }
 
+static void kapitel10_aufgabe4() {
+    bool first_start = true;
+    int entry;
+    do {
+        if (!first_start)
+            cin.ignore(LLONG_MAX,'\n');
+        first_start = false;
+        cout << "Willkommen beim Buchungsportal\nWählen Sie 'B' für Buchen oder 'E' für Ende." << endl;
+        entry = cin.get();
+        if (entry== 'B') {
+            cout<<"Bitte geben Sie das Passwort ein, um den Buchungsvorgang zu starten."<<endl;
+            if (getPassword())
+                changePasswortRequest();
+            else
+                cout << "Passworteingabe fehlgeschlagen."<<endl;
+        }
+    } while (entry != 'E');
+    cout << "Das Buchungsprogramm wurde beendet. Auf Wiedersehen!"<<endl;
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -494,6 +517,7 @@ int main() {
     //kapitel9_aufgabe2();
     //kapitel9_aufgabe3();
     //kapitel9_aufgabe4();
-    kapitel10_aufgabe2();
+    //kapitel10_aufgabe2();
+    kapitel10_aufgabe4();
     return 0;
 }
