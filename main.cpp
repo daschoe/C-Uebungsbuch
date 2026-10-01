@@ -491,6 +491,79 @@ static void kapitel10_aufgabe4() {
     cout << "Das Buchungsprogramm wurde beendet. Auf Wiedersehen!"<<endl;
 }
 
+// Für Aufgabe 11.2
+static void kreis(const double& radius, double& umfang, double& flaeche) {
+    static const double pi = 3.1415926536;
+    umfang = 2.0*pi*radius;
+    flaeche = pi * radius * radius;
+}
+
+static void kapitel11_aufgabe2() {
+    cout << "Radius | Umfang | Fläche"<<endl;
+    cout << string(27,'-')<<endl;
+    double umfang, flaeche;
+    for (double r=0.5; r<10.5; r+=0.5) {
+        kreis(r,umfang,flaeche);
+        cout<<setw(6)<<r<<" | "<<setw(6)<<umfang<<" | "<<setw(6)<<flaeche<<endl;
+    }
+}
+
+// Für Aufgabe 11.3
+void swap_ptr(float *p1, float *p2)
+{
+    float temp; // Hilfsvariable
+    temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+}
+void swap_ref(float &p1, float &p2)
+{
+    float temp; // Hilfsvariable
+    temp = p1;
+    p1 = p2;
+    p2 = temp;
+}
+
+static void kapitel11_aufgabe3() {
+    float x = 0.5;
+    float y = 99.9;
+    cout<<"ursprüngliche Werte\nx: "<<x<<", y: "<<y<<endl;
+    swap_ptr(&x,&y);
+    cout<<"nach \"swap_ptr\"\nx: "<<x<<", y: "<<y<<endl;
+    swap_ref(x,y);
+    cout<<"nach \"swap_ref\"\nx: "<<x<<", y: "<<y<<endl;
+}
+
+// Für 11.4
+bool quadGleich(const double& a, const double& b, const double& c, double& x1, double& x2) {
+    if ((b*b -4*a*c) >= 0) {
+        x1 = (-b+sqrt((b*b-4*a*c)))/(2*a);
+        x2 = (-b-sqrt((b*b-4*a*c)))/(2*a);
+        return true;
+    }
+    return false;
+}
+
+static void printGleichung(const double a, const double b, const double c) {
+    double x1=0,x2=0;
+    if (quadGleich(a,b,c,x1,x2)) {
+        cout << setw(4)<<a<<" | "<<setw(4)<<b<<" | "<<setw(4)<<c<< " | "<<setw(4)<<x1<<" | "<<setw(4)<<x2<<endl;
+
+    }
+    else
+        cout << setw(4)<<a<<" | "<<setw(4)<<b<<" | "<<setw(4)<<c<< " | "<<setw(4)<<""<<" | "<<setw(4)<<""<<endl;
+
+}
+
+static void kapitel11_aufgabe4() {
+
+    cout << setw(4)<<"a"<<" | "<<setw(4)<<"b"<<" | "<<setw(4)<<"c"<< " | "<<setw(4)<<"x1"<<" | "<<setw(4)<<"x2"<<endl;
+    cout << string(32,'-')<<endl;
+    printGleichung(2,-2,-1.5);
+    printGleichung(1,-6,9);
+    printGleichung(2,0,2);
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -518,6 +591,9 @@ int main() {
     //kapitel9_aufgabe3();
     //kapitel9_aufgabe4();
     //kapitel10_aufgabe2();
-    kapitel10_aufgabe4();
+    //kapitel10_aufgabe4();
+    //kapitel11_aufgabe2();
+    //kapitel11_aufgabe3();
+    //kapitel11_aufgabe4();
     return 0;
 }
