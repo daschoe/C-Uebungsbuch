@@ -7,6 +7,7 @@
 #include "myMakros.h"
 #include "summe.h"
 #include "Passw2.cpp"
+#include "Datum.h"
 
 using namespace std;
 
@@ -564,6 +565,14 @@ static void kapitel11_aufgabe4() {
     printGleichung(2,0,2);
 }
 
+void kapitel12_aufgabe1() {
+    Datum datum1, datum2;
+    datum1.init();
+    datum2.init(23,12,1953);
+    datum1.print();
+    datum2.print();
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -595,5 +604,6 @@ int main() {
     //kapitel11_aufgabe2();
     //kapitel11_aufgabe3();
     //kapitel11_aufgabe4();
+    kapitel12_aufgabe1();
     return 0;
 }
