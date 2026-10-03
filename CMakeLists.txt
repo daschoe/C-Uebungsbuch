@@ -9,12 +9,14 @@ set(PROJECT_HEADERS
         tool1.h
         tool2.h
         Datum.h
+        Artikel.h
 )
 set(PROJECT_SOURCES
         main.cpp
         summe.cpp
         Passw2.cpp
         Datum.cpp
+        Artikel.cpp
 )
 
 add_executable(Uebungsbuch ${PROJECT_SOURCES} ${PROJECT_HEADERS})

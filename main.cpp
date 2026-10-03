@@ -8,6 +8,7 @@
 #include "summe.h"
 #include "Passw2.cpp"
 #include "Datum.h"
+#include "Artikel.h"
 
 using namespace std;
 
@@ -573,6 +574,64 @@ void kapitel12_aufgabe1() {
     datum2.print();
 }
 
+// Für Kapitel 13 Aufgabe 1
+void test() {
+    cout<<"test wird aufgerufen..."<<endl;
+    static Artikel artikel1(1234567890, "Testobjekt", 12.99);
+    Artikel artikel2(9000200931, "Käse", 1.99);
+    artikel1.print();
+    artikel2.print();
+    cout<<"test wird beendet..."<<endl;
+}
+
+void test(Artikel art) {
+    cout<<"test mit Artikel wird aufgerufen..."<<endl;
+    static Artikel artikel1(1234567890, "Testobjekt", 12.99);
+    Artikel artikel2(9000200931, "Käse", 1.99);
+    artikel1.print();
+    artikel2.print();
+    cout<<"test mit Artikel wird beendet..."<<endl;
+    // Kopiert das übergebene Objekt mit Default-Konstruktor (num_artikel wird nicht inkrementiert)! -> negativer Zähler am Ende
+}
+
+//Artikel artikel1(1000000,"erste Sahne",1.99);
+
+void kapitel13_aufgabe1() {
+    cout<<"main wird aufgerufen..."<<endl;
+    Artikel artikel2(48439458, "Zweite Geige",999.99);
+    //artikel1.print();
+    artikel2.print();
+    //artikel1.setArtikelnummer(11111111);
+    //artikel1.setBezeichnung("Veränderungstrank");
+    //artikel1.setPreis(-99);
+    //artikel1.print();
+    test();
+    test();
+    //test(artikel1);
+    cout<<"main wird beendet..."<<endl;
+}
+
+void kapitel13_aufgabe2() {
+    Datum datum1;
+    Datum datum2(23,12,1995);
+    datum1.print();
+    datum2.print();
+    cout<<datum1.asString()<<endl;
+    cout<<"Vergleich Equal "<<datum1.isEqual(datum2)<<endl;
+    cout<<"Vergleich isLess "<<datum1.isLess(datum2)<<endl;
+    datum1.setDatum();
+    cout<<"Vergleich Equal "<<datum2.isEqual(datum1)<<endl;
+    cout<<"Vergleich isLess "<<datum2.isLess(datum1)<<endl;
+    datum2.setDatum(3,10,2026);
+    cout<<"Vergleich Equal "<<datum1.isEqual(datum2)<<endl;
+    cout<<"Vergleich isLess "<<datum1.isLess(datum2)<<endl;
+    cout<<datum1.getTag()<<"."<<datum1.getMonat()<<"."<<datum1.getJahr()<<endl;
+    Datum datum3(30,2,1995);
+    datum3.print();
+    datum3.setDatum(29,2,2024);
+    datum3.print();
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -604,6 +663,8 @@ int main() {
     //kapitel11_aufgabe2();
     //kapitel11_aufgabe3();
     //kapitel11_aufgabe4();
-    kapitel12_aufgabe1();
+    //kapitel12_aufgabe1();
+    //kapitel13_aufgabe1();
+    //kapitel13_aufgabe2();
     return 0;
 }
