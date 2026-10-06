@@ -12,8 +12,10 @@ private:
     long artikelnummer;
     std::string artikelbezeichnung;
     double verkaufspreis;
+    static int num_artikel;
 public:
-    Artikel(long, const std::string&, double);
+    Artikel(long nr=0, const std::string& name="", double preis=0.0);
+    Artikel(const Artikel&);
     ~Artikel();
     void print(); //formatierte Ausgabe
     long getArtikelnummer() {return artikelnummer;}
@@ -26,6 +28,7 @@ public:
             preis = 0.0;
         verkaufspreis=preis;
     }
+    static int getAnzahl() {return num_artikel;}
 };
 
 

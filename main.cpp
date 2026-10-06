@@ -4,11 +4,14 @@
 #include <iomanip>
 #include <string>
 #include <ctime>
+
+#include "Ampel.h"
 #include "myMakros.h"
 #include "summe.h"
 #include "Passw2.cpp"
 #include "Datum.h"
 #include "Artikel.h"
+#include "Mitglied.h"
 
 using namespace std;
 
@@ -594,20 +597,20 @@ void test(Artikel art) {
     // Kopiert das übergebene Objekt mit Default-Konstruktor (num_artikel wird nicht inkrementiert)! -> negativer Zähler am Ende
 }
 
-//Artikel artikel1(1000000,"erste Sahne",1.99);
+Artikel artikel1(1000000,"erste Sahne",1.99);
 
-void kapitel13_aufgabe1() {
+void kapitel13und14_aufgabe1() {
     cout<<"main wird aufgerufen..."<<endl;
     Artikel artikel2(48439458, "Zweite Geige",999.99);
-    //artikel1.print();
+    artikel1.print();
     artikel2.print();
-    //artikel1.setArtikelnummer(11111111);
-    //artikel1.setBezeichnung("Veränderungstrank");
-    //artikel1.setPreis(-99);
-    //artikel1.print();
+    artikel1.setArtikelnummer(11111111);
+    artikel1.setBezeichnung("Veränderungstrank");
+    artikel1.setPreis(-99);
+    artikel1.print();
     test();
     test();
-    //test(artikel1);
+    test(artikel1);
     cout<<"main wird beendet..."<<endl;
 }
 
@@ -630,6 +633,64 @@ void kapitel13_aufgabe2() {
     datum3.print();
     datum3.setDatum(29,2,2024);
     datum3.print();
+}
+
+void kapitel14_aufgabe2() {
+    //TODO hier ist irgendwas mit dem Datum kaputt...
+    Mitglied m1(12345, "Paul", Datum(1,1,1980));
+    Mitglied m2(67890, "Anna", 23, 4, 2000);
+    cout<<m1.get_name()<<" "<<endl;
+    m1.get_geburtsdatum().print();
+    cout<<m1.get_geburtsdatum().getTag()<<"."<<m1.get_geburtsdatum().getMonat()<<"."<<m1.get_geburtsdatum().getJahr()<<endl;
+    m1.print();
+    m2.print();
+    cout << "\nWer ist der Vorstand des Vereins?\n"
+<< "Mitgliedsnummer eingeben: ";
+    int nr;
+    Mitglied *ptr = NULL;
+    if( cin >> nr) {
+        if (nr == m1.get_mitgliedsnummer()) {
+            ptr = &m1;
+        }
+        else if (nr == m2.get_mitgliedsnummer()) {
+            ptr = &m2;
+        }
+        Mitglied::setVorstand(ptr);
+    }
+    if (Mitglied::getVostand() != NULL)
+        cout<<"Der Vorstand ist "<< Mitglied::getVostand()->get_name()<<"!"<<endl;
+    else
+        cout<< "Es wurde noch kein Vorstand gewählt."<<endl;
+}
+
+void kapitel14_aufgabe3() {
+    Ampel a1, a2;
+    cout << "1.Ampel 2.Ampel\n"<<string(15,'-')<<endl;
+    while (true) {
+        a1.setStatus(Ampel::rot);
+        a2.setStatus(Ampel::gelb);
+        cout<<endl;
+        Ampel::warten(Ampel::gelbzeit);
+        cout<<"     ";
+        a2.setStatus(Ampel::gruen);
+        cout<<endl;
+        Ampel::warten(Ampel::gruenzeit);
+        cout<<"     ";
+        a2.setStatus(Ampel::gelb);
+        cout<<endl;
+        Ampel::warten(Ampel::gelbzeit);
+
+        a1.setStatus(Ampel::gelb);
+        a2.setStatus(Ampel::rot);
+        cout<<endl;
+        Ampel::warten(Ampel::gelbzeit);
+        a1.setStatus(Ampel::gruen);
+        cout<<endl;
+        Ampel::warten(Ampel::gruenzeit);
+        a1.setStatus(Ampel::gelb);
+        cout<<endl;
+        Ampel::warten(Ampel::gelbzeit);
+    }
 }
 
 int main() {
@@ -664,7 +725,9 @@ int main() {
     //kapitel11_aufgabe3();
     //kapitel11_aufgabe4();
     //kapitel12_aufgabe1();
-    //kapitel13_aufgabe1();
+    //kapitel13und14_aufgabe1();
     //kapitel13_aufgabe2();
+    //kapitel14_aufgabe2();
+    kapitel14_aufgabe3();
     return 0;
 }

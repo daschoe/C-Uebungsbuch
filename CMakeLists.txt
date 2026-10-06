@@ -10,6 +10,8 @@ set(PROJECT_HEADERS
         tool2.h
         Datum.h
         Artikel.h
+        Mitglied.h
+        Ampel.h
 )
 set(PROJECT_SOURCES
         main.cpp
@@ -17,6 +19,7 @@ set(PROJECT_SOURCES
         Passw2.cpp
         Datum.cpp
         Artikel.cpp
+        Mitglied.cpp
 )
 
 add_executable(Uebungsbuch ${PROJECT_SOURCES} ${PROJECT_HEADERS})

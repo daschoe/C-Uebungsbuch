@@ -6,13 +6,24 @@
 
 #include <iomanip>
 #include <iostream>
-int num_artikel = 0;
+//int num_artikel = 0;
+int Artikel::num_artikel = 0;
 
 Artikel::Artikel(long nr, const std::string & name, double preis) {
     std::cout<<"Es wird ein Objekt für den Artikel " << name << " angelegt.\nDies ist der "<<++num_artikel<<"-te Artikel."<<std::endl;
     artikelnummer = nr;
     artikelbezeichnung = name;
     verkaufspreis = preis;
+}
+
+Artikel::Artikel(const Artikel & other)
+    : artikelnummer(other.artikelnummer),
+    artikelbezeichnung(other.artikelbezeichnung),
+    verkaufspreis(other.verkaufspreis)
+{
+    ++num_artikel;
+    std::cout<<"Es wird ein Objekt für den Artikel " << other.artikelbezeichnung<< " angelegt.\nDies ist der "<<num_artikel<<"-te Artikel."<<std::endl;
+
 }
 
 Artikel::~Artikel() {
