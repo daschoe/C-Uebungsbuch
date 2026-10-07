@@ -11,7 +11,9 @@
 #include "Passw2.cpp"
 #include "Datum.h"
 #include "Artikel.h"
+#include "DayTime.h"
 #include "Mitglied.h"
+#include "telList.h"
 
 using namespace std;
 
@@ -597,20 +599,20 @@ void test(Artikel art) {
     // Kopiert das übergebene Objekt mit Default-Konstruktor (num_artikel wird nicht inkrementiert)! -> negativer Zähler am Ende
 }
 
-Artikel artikel1(1000000,"erste Sahne",1.99);
+//Artikel artikel1(1000000,"erste Sahne",1.99);
 
 void kapitel13und14_aufgabe1() {
     cout<<"main wird aufgerufen..."<<endl;
     Artikel artikel2(48439458, "Zweite Geige",999.99);
-    artikel1.print();
+    //artikel1.print();
     artikel2.print();
-    artikel1.setArtikelnummer(11111111);
-    artikel1.setBezeichnung("Veränderungstrank");
-    artikel1.setPreis(-99);
-    artikel1.print();
+    //artikel1.setArtikelnummer(11111111);
+    //artikel1.setBezeichnung("Veränderungstrank");
+    //artikel1.setPreis(-99);
+    //artikel1.print();
     test();
     test();
-    test(artikel1);
+    //test(artikel1);
     cout<<"main wird beendet..."<<endl;
 }
 
@@ -693,6 +695,135 @@ void kapitel14_aufgabe3() {
     }
 }
 
+void kapitel15_aufgabe1() {
+    const int MAXANZ = 100; // Konstante
+    long arr[MAXANZ], x; // Vektor, Hilfsvariable
+    int i, anz; // Index, Anzahl
+    cout << "Bis zu 100 Zahlen eingeben\n"
+    << "(Abbruch mit einem Buchstaben):" << endl;
+    for( i = 0; i < MAXANZ && cin >> x; ++i)
+        arr[i] = x;
+    anz = i;
+    cout << "Die eingegebenen Zahlen:\n" << endl;
+    for( i = 0; i < anz; ++i)
+        cout << setw(10) << arr[i];
+    cout << endl;
+    bool sorted = false;
+    while (!sorted) {
+        bool sorted_this_time = true;
+        for (int pos=1; pos < anz; pos++) {
+            if (arr[pos]<arr[pos-1]) {
+                int tmp = arr[pos];
+                arr[pos] = arr[pos-1];
+                arr[pos-1] = tmp;
+                sorted_this_time = false;
+            }
+            else {
+                if (pos==(anz-1))
+                    sorted = sorted_this_time;
+            }
+        }
+    }
+    cout << "Die sortierten Zahlen:\n" << endl;
+    for( i = 0; i < anz; ++i)
+        cout << setw(10) << arr[i];
+    cout << endl;
+}
+
+void kapitel15_aufgabe2() {
+    DayTime dates[4] = {DayTime(12,30,0), DayTime(23,59,59), DayTime(12,50,30), DayTime(6,0,0)};
+    cout << "Alle Daten:\n" << endl;
+    for(int i = 0; i < 4; ++i)
+        dates[i].print();
+    cout << endl;
+
+    DayTime* minimum = &dates[0];
+    DayTime* maximum = &dates[0];
+    for(int i = 1; i < 4; ++i) {
+        if (dates[i].isLess(*minimum))
+            minimum = &dates[i];
+        if (maximum->isLess(dates[i]))
+            maximum = &dates[i];
+    }
+    cout<<"Die früheste Uhrzeit ist ";
+    minimum->print();
+    cout<<"\nDie späteste Uhrezit ist ";
+    maximum->print();
+    cout<<endl;
+}
+
+void kapitel15_aufgabe3() {
+    int len = 1000;
+    bool sieb[len];
+    for (int i = 0;i<len;i++)
+        sieb[i]=true;
+    sieb[0] = sieb[1] = false;
+    for (int number=2;number<len;number++) {
+        if (sieb[number]!=false) {
+            sieb[number] = true;
+            for (int multi=2;multi*number<len;multi++) {
+                sieb[multi*number] = false;
+            }
+        }
+
+    }
+    cout<<"Primzahlen"<<endl;
+    for (int i=0;i<len;i++) {
+        if (sieb[i])
+            cout<<i<<", ";
+    }
+    cout<<endl;
+}
+
+int kapitel15_aufgabe4() {
+    char wahl;
+    TelList tel_list;
+    while (wahl!='B') {
+        cout<<"***** Telefonliste *****\n"<<
+        "A = Anzeigen aller Einträge\n"<<
+        "F = Finden einer Telefonnummer\n"<<
+        "H = Hinzufügen eines Eintrags\n"<<
+        "L = Löschen eines Eintrags\n"<<
+        "B = Beenden des Programms\n"<<
+        "Ihre Wahl:"<<endl;
+        cin >> wahl;
+        cin.ignore(LLONG_MAX,'\n');
+        switch (wahl) {
+            case 'A': {
+                tel_list.print();
+                break;
+            }
+            case 'F': {
+                cout<<"Geben Sie einen Namen oder die ersten Buchstaben eines Namens ein."<<endl;
+                string name;
+                getline(cin, name);
+                if (tel_list.print(name) == PSEUDO)
+                    cout<<"Keine passenden Einträge gefunden."<<endl;
+                break;
+            }
+            case 'H': {
+                string name, nummer;
+                cout<<"Geben Sie den Namen ein."<<endl;
+                getline(cin, name);
+                cout<<"Geben Sie die Telefonnummer ein."<<endl;
+                getline(cin, nummer);
+                tel_list.append(name, nummer);
+                break;
+            }
+            case 'L': {
+                string name;
+                cout<<"Geben Sie den Namen des zu löschenden Eintrags ein."<<endl;
+                getline(cin, name);
+                tel_list.erase(name);
+                break;
+            }
+            case 'B':
+                return 0;
+        }
+    }
+
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -728,6 +859,10 @@ int main() {
     //kapitel13und14_aufgabe1();
     //kapitel13_aufgabe2();
     //kapitel14_aufgabe2();
-    kapitel14_aufgabe3();
+    //kapitel14_aufgabe3();
+    //kapitel15_aufgabe1();
+    //kapitel15_aufgabe2();
+    //kapitel15_aufgabe3();
+    kapitel15_aufgabe4();
     return 0;
 }

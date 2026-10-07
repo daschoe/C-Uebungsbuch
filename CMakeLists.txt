@@ -12,6 +12,8 @@ set(PROJECT_HEADERS
         Artikel.h
         Mitglied.h
         Ampel.h
+        DayTime.h
+        telList.h
 )
 set(PROJECT_SOURCES
         main.cpp
@@ -20,6 +22,7 @@ set(PROJECT_SOURCES
         Datum.cpp
         Artikel.cpp
         Mitglied.cpp
+        telList.cpp
 )
 
 add_executable(Uebungsbuch ${PROJECT_SOURCES} ${PROJECT_HEADERS})
