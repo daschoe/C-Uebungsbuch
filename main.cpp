@@ -1,6 +1,7 @@
 #include <climits>
 #include <iostream>
 #include <cmath>
+#include <cstring>
 #include <iomanip>
 #include <string>
 #include <ctime>
@@ -824,6 +825,114 @@ int kapitel15_aufgabe4() {
 
 }
 
+void kapitel16_aufgabe1() {
+    int v[] = { 10, 20, 30, 40 }, i, *pv;
+    for( pv = v; pv <= v + 3; pv++ ) // alle Elemente
+        cout << " *pv = " << *pv;
+    cout<<endl;
+    for( pv = v, i = 1; i <= 3; i++ ) // alle Elemente ab Index 1
+        cout << " pv[i] = " << pv[i];
+    cout<<endl;
+    for( pv = v, i = 0; pv+i <= &v[3]; pv++,i++) // Element bei 0 und Element bei 1+1=2
+        cout << " *(pv + i) = " << *(pv + i);
+    cout<<endl;
+    for( pv = v + 3; pv >= v; --pv ) //alle Elemente in umgekehrter Reihenfolge
+        cout << " v[" << (pv - v) << "] = "<< v[pv - v];
+}
+
+void kapitel16_aufgabe2() {
+    cout<<"Bitte eine Zeile eingeben. Ende mit RETURN."<<endl;
+    char wort[100], *ptr=wort, inpt=cin.get();
+    while (inpt!='\n') {
+        *ptr=inpt;
+        ptr++;
+        inpt=cin.get();
+    }
+    while (ptr>wort) {
+        --ptr;
+        cout<<*ptr;
+    }
+    cout<<endl;
+}
+
+// für Kapitel 16 Aufgabe 3
+int str_cmp(const char str1[], const char str2[]) {
+    for (;*str1 == *str2 && *str1 != '\0' && *str2 !=0; *str1++, *str2++) {
+        ;
+    }
+    return *str1 - *str2;
+}
+
+void kapitel16_aufgabe3() {
+    int MAXLEN = 100;
+    char zeile1[MAXLEN], zeile2[MAXLEN];
+    cout<<"Geben sie eine erste Zeile ein:"<<endl;
+    cin.get(zeile1, MAXLEN);
+    cin.ignore(LLONG_MAX,'\n');
+    cout<<"Geben sie eine zweite Zeile ein:"<<endl;
+    cin.get(zeile2, MAXLEN);
+    cin.ignore(LLONG_MAX,'\n');
+    cout<<strcmp(zeile1, zeile2)<<endl;
+    cout<<str_cmp(zeile1, zeile2)<<endl;
+
+}
+
+// für Kapitel 16 Aufgabe 4
+void selectionSortIdx(int vec[], int len) {
+    for (int j=0; j<len; j++) {
+        int idx_smallest = j;
+        for (int i=j; i<len; i++) {
+            if (vec[i]<vec[idx_smallest])
+                idx_smallest = i;
+        }
+        int tmp = vec[j];
+        vec[j] = vec[idx_smallest];
+        vec[idx_smallest] = tmp;
+    }
+}
+
+void selectionSortPtr(int vec[], const int len) {
+    int *current, *smallest, *helper;
+    for (current=vec; current<vec+len; current++) {
+        smallest = current;
+        for (helper=current;helper<vec+len;helper++) {
+            if (*helper<*smallest) {
+                smallest = helper;
+            }
+        }
+        if (current != smallest)
+        {
+            int tmp = *current;
+            *current = *smallest;
+            *smallest = tmp;
+        }
+    }
+}
+
+void kapitel16_aufgabe4() {
+    int VLEN = 5, vector[VLEN], orig[VLEN];
+    //int vector[VLEN] = {100, 50, 30, 70, 40};
+    for (int i=0; i<VLEN; i++) {
+        vector[i] = (rand()%20000)-10000;
+        orig[i] = vector[i];
+        cout<<vector[i]<<"\t";
+    }
+    cout<<endl;
+    selectionSortIdx(vector, VLEN);
+    for (int i=0; i<VLEN; i++) {
+        cout<<vector[i]<<"\t";
+    }
+    cout<<endl;
+    for (int i=0; i<VLEN; i++) {
+        cout<<orig[i]<<"\t";
+    }
+    cout<<endl;
+    selectionSortPtr(orig, VLEN);
+    for (int i=0; i<VLEN; i++) {
+        cout<<orig[i]<<"\t";
+    }
+}
+
 int main() {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
@@ -863,6 +972,13 @@ int main() {
     //kapitel15_aufgabe1();
     //kapitel15_aufgabe2();
     //kapitel15_aufgabe3();
-    kapitel15_aufgabe4();
+    //kapitel15_aufgabe4();
+    //kapitel16_aufgabe1();
+    //kapitel16_aufgabe2();
+    //kapitel16_aufgabe3();
+    kapitel16_aufgabe4();
+    //kapitel16_aufgabe5();
+    //kapitel16_aufgabe6();
+    //kapitel16_aufgabe7();
     return 0;
 }
