@@ -933,7 +933,81 @@ void kapitel16_aufgabe4() {
     }
 }
 
-int main() {
+void kapitel16_aufgabe5(int argc, char* argv[], char* argp[]) {
+    cout<<"Anzahl der Argumente: "<<argc<<endl;
+    for (int i=0; i<argc; i++) {
+        cout << i <<"tes Argument: "<<argv[i]<<endl;
+    }
+    cout<<"Umgebungsvariablen"<<endl;
+    for (int i = 0; argp[i] != NULL; i++) {
+        cout<<argp[i]<<endl;
+    }
+}
+
+int spalten_zeilen_summen(int matrix [3][5],  int zeilensummen[3], int spaltensummen[5]) {
+    int summe = 0;
+    for (int z=0; z<3; z++) {
+        int zsumme = 0;
+        for (int s=0; s<5;s++) {
+            zsumme += matrix[z][s];
+        }
+        zeilensummen[z] = zsumme;
+        summe += zsumme;
+    }
+    for (int s=0; s<5; s++) {
+        int ssumme = 0;
+        for (int z=0; z<3;z++) {
+            ssumme += matrix[z][s];
+        }
+        spaltensummen[s] = ssumme;
+    }
+    return summe;
+}
+
+void kapitel16_aufgabe6(int argc, char* argv[]) {
+    if (argc!=2) {
+        cout<<"Keine gültige Eingabe!\nNutzen Sie die Form 'main Suchmuster < Datei'"<<endl;
+        return;
+    }
+    int MAXL = 200; // maximale Zeilenlänge
+    char zeile[500];
+    int zeilenNr = 0;
+    // Solange noch eine Zeile da ist:
+    while( cin.getline( zeile, MAXL))
+    {
+        ++zeilenNr;
+        if( strstr( zeile, argv[1]) != NULL)
+        { // Falls Muster gefunden:
+            cout.width(3);
+            cout << zeilenNr << ": " // Zeilennr. und
+            << zeile << endl; // Zeile ausgeben.
+        }
+    }
+}
+
+void kapitel16_aufgabe7() {
+    cout<<setw(10)<<"Blutdruck";
+    cout <<setw(10)<<"< 120"<<setw(10)<< "120-129"<<setw(10)<< "130-139"<<setw(10)<< "140-149"<<setw(10) <<">= 160"<<endl;
+    cout<<setw(10)<<"Alter"<<endl;
+    string rows[3] = {"20-29", "30-39", "40-49"};
+    int bw_matrix [3][5] = {{25, 34, 26, 12, 8},{19, 27, 24, 11, 4},{6, 15, 35, 36, 18}};
+    int zeilensumme[3], spaltensumme[5];
+    int summe = spalten_zeilen_summen(bw_matrix, zeilensumme, spaltensumme);
+    for (int z=0; z<3; z++) {
+        cout <<setw(10)<< rows[z];
+        for (int s=0; s<5;s++) {
+            cout <<setw(10)<< bw_matrix[z][s];
+        }
+        cout<<setw(10)<<zeilensumme[z]<<endl;
+    }
+    cout<<setw(10)<<" ";
+    for (int s=0; s<5;s++) {
+        cout <<setw(10)<< spaltensumme[s];
+    }
+    cout <<setw(10)<< summe<<endl;
+}
+
+int main(int argc, char* argv[], char* argp[]) {
     //kapitel1_aufgabe1();
     //kapitel1_aufgabe2();
     //kapitel2_aufgabe1();
@@ -976,9 +1050,9 @@ int main() {
     //kapitel16_aufgabe1();
     //kapitel16_aufgabe2();
     //kapitel16_aufgabe3();
-    kapitel16_aufgabe4();
-    //kapitel16_aufgabe5();
-    //kapitel16_aufgabe6();
+    //kapitel16_aufgabe4();
+    //kapitel16_aufgabe5(argc, argv, argp);
+    //kapitel16_aufgabe6(argc, argv);
     //kapitel16_aufgabe7();
     return 0;
 }
